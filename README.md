@@ -16,7 +16,7 @@ Verwende CSS oder Sass, um deiner Seite Style zu verleihen.
 
 Beim Hovern über die Eingabefelder und den Button, soll die Farbe der Elemente verändert werden.
 
-Achte auch guten Kontrast bei der Farbwahl.
+Achte auf guten Kontrast bei der Farbwahl.
 
 Verleihe deiner Seite einen Hintergrund und style optional die Tabelle.
 
