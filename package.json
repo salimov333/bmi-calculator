@@ -1,0 +1,25 @@
+{
+  "name": "bmi-calculator",
+  "version": "1.0.0",
+  "description": "BMI Calculater app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm dist -rf && mkdir dist && cp -r src/* dist",
+    "publish": "gh-pages -d dist",
+    "deploy": "npm run build & npm run publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salimov333/bmi-calculator.git"
+  },
+  "author": "salimov333",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salimov333/bmi-calculator/issues"
+  },
+  "homepage": "https://github.com/salimov333/bmi-calculator#readme",
+  "dependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}
