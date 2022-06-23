@@ -126,7 +126,7 @@ function getStoredBmi() {
     } else if (checkStoredBmi()) {
         storedBmi.innerText = `Willkommen zurück! Dein letzter BMI war: ${storedBmiKey}`
     } else {
-        storedBmi.innerText = "Willkommen zu BMI Rechner App! Gib Dein Daten ein und drücke auf Berechnen"
+        storedBmi.innerText = "Willkommen zu BMI Rechner App! Gib Deine Daten ein und drücke auf Berechnen"
         changedBmi.innerText = "";
     }
 }
