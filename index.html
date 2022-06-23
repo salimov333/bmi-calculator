@@ -19,6 +19,10 @@
 
         <form>
             <div class="mb-3">
+                <label class="form-label" for="benutzer_name">Name</label>
+                <input class="form-control" type="text" name="benutzer_name" id="benutzer_name" value="" />
+            </div>
+            <div class="mb-3">
                 <label class="form-label" for="alter"><strong>Alter</strong> (in Jahren)</label>
                 <input class="form-control" type="number" name="alter" id="alter" value="30" />
             </div>
@@ -41,7 +45,10 @@
                 <div class="p-2 text-center placeholder-glow" id="result">
                     <span class="placeholder"></span>
                 </div>
-                <button type="submit" class="btn btn-success">Berechnen</button>
+                <div id="stored_bmi" class="p-2 text-center"></div>
+                <div id="changed_bmi" class="p-2 text-center"></div>
+                <button type="submit" id="submit" class="btn btn-success">Berechnen</button>
+                <button type="button" id="clear" class="btn btn-warning">Meine Daten Löschen</button>
             </div>
         </form>
 

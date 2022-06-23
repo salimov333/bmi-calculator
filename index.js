@@ -7,14 +7,19 @@ const größe = document.getElementById("größe"); // Eingabe Größe (<input>)
 const gewicht = document.getElementById("gewicht"); // Eingabe Gewicht (<input>)
 const bmi = document.getElementById("bmi"); // Ausgabe BMI (<input>)
 const result = document.getElementById("result"); // Ausgabe Gewichtsklasse (<div>)
-const btn = document.querySelector(".btn");
+const submitBtn = document.querySelector("#submit");
+const clearBtn = document.querySelector("#clear");
 const inputs = document.querySelectorAll("input");
+const storedBmi = document.getElementById("stored_bmi");
+const changedBmi = document.getElementById("changed_bmi");
+const benutzerName = document.getElementById("benutzer_name");
 
 // Funktion die BMI berechnet und Ergebnis anzeigt
 
 function calcBMI(e) {
     //console.log(e.target);
     e.preventDefault();
+    getStoredBmi();
     let alterMod;
     if (alter.value >= 19 && alter.value <= 24) {
         alterMod = 0;
@@ -62,15 +67,79 @@ function calcBMI(e) {
 
     Array.from(inputs).forEach(input => {
         input.addEventListener("input", (e) => {
+            if (e.target.matches("#benutzer_name")) {
+                localStorage.clear();
+            }
             //console.log(e.target);
             result.textContent = "";
             result.style.backgroundColor = "transparent";
             result.innerHTML = `<span class="placeholder"></span>`
             //console.log(result.children);
+            storedBmi.innerHTML = "";
+            changedBmi.innerHTML = "";
             bmi.value = "";
         })
     });
 
+
+    //show changed BMI
+    if (checkStoredBmi() && checkStoredBmi() != bmi.value) {
+        changedBmi.innerText = `Dein BMI hat sich von ${checkStoredBmi()} auf ${bmi.value} geändert`
+    } else if (!checkStoredUsername() || checkStoredBmi() == bmi.value) {
+        changedBmi.innerText = "";
+    } else {
+        changedBmi.innerText = `Dein BMI hat sich seit dem letzten mal nicht verändert`
+
+    }
+
+    //save new BMI
+    localStorage.setItem("bmi", bmi.value);
+    storedBmi.innerText = `Dein aktueller BMI ist: ${bmi.value}`
+
+    //save new username
+    localStorage.setItem("benutzerName", benutzerName.value);
 }
 
-btn.addEventListener("click", calcBMI);
+//check stored BMI
+function checkStoredBmi() {
+    return localStorage.getItem("bmi");
+}
+
+//check stored username
+function checkStoredUsername() {
+    return localStorage.getItem("benutzerName");
+}
+
+//get and show stored BMI and username
+//console.log(localStorage);
+console.log(checkStoredUsername());
+console.log(checkStoredBmi());
+function getStoredBmi() {
+    const storedUsernameKey = localStorage.getItem("benutzerName");
+    const storedBmiKey = localStorage.getItem("bmi");
+    const benutzerNameValue = benutzerName.value;
+
+    if (checkStoredBmi() && checkStoredUsername()) {
+        storedBmi.innerText = `Hallo ${storedUsernameKey}! Dein letzter BMI war: ${storedBmiKey}`
+    } else if (checkStoredBmi() && benutzerNameValue) {
+        storedBmi.innerText = `Hallo ${benutzerNameValue}! Dein letzter BMI war: ${storedBmiKey}`
+    } else if (checkStoredBmi()) {
+        storedBmi.innerText = `Willkommen zurück! Dein letzter BMI war: ${storedBmiKey}`
+    } else {
+        storedBmi.innerText = "Willkommen zu BMI Rechner App! Gib Dein Daten ein und drücke auf Berechnen"
+        changedBmi.innerText = "";
+    }
+}
+getStoredBmi();
+
+//Events
+submitBtn.addEventListener("click", calcBMI);
+
+clearBtn.onclick = () => {
+    localStorage.clear();
+    getStoredBmi();
+    result.style.backgroundColor = "transparent";
+    result.innerHTML = `<span class="placeholder"></span>`;
+    benutzerName.value = "";
+    bmi.value = "";
+}
