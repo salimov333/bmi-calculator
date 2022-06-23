@@ -67,6 +67,7 @@ function calcBMI(e) {
             result.style.backgroundColor = "transparent";
             result.innerHTML = `<span class="placeholder"></span>`
             //console.log(result.children);
+            bmi.value = "";
         })
     });
 
